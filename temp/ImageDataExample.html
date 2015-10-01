@@ -7,23 +7,22 @@
 		<canvas id="c"></canvas>
 
 		<script>
-		var ctx = document.querySelector("#c");
-		var imageData = ctx.getContext("2d");
-		ctx.rect(0, 0, 500, 500);
-		ctx.fill();
-
-		var pixelData =	[4];
+			var c = document.querySelector("#c");
+			var ctx = c.getContext("2d");
+			var canvasSize = 500;
+			var green2ndPixel = 255;
 		
-		pixelData[0] = 0;
-		pixelData[1] = 255;
-		pixelData[2] = 0;
-				
+			var imageData = ctx.getImageData(0, 0, canvasSize, canvasSize);
+			var NumberOfPixels = imageData.data.length / 4;
 
-		for(var x = 0; x < 500; x = x + 10){
-			for(var y = 0; y< 500; y = y + 10){		
-				ctx.putImageData(pixelData,x,y);
-			}			
-		}
+			for (var i=0; i<NumberOfPixels;i++){
+				if (i%10 === 0){
+			   		imageData.data[i * 4 + 1] = green2ndPixel;
+			   		imageData.data[i * 4 + 3] = green2ndPixel;
+				}
+			}
+
+			ctx.putImageData(imageData,0,0);
 
 		</script>
 	</body>
